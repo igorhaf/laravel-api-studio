@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}" />
     <script src="{{asset('js/app.js')}}"></script>
     <script src="{{asset('js/main.js')}}"></script>
+    <livewire:styles />
 
 </head>
 <body>
@@ -158,6 +159,21 @@
 
         </div>
         <div class="col-10">
+            <div x-data="{ content: '' }">
+                <div
+                    x-init="
+                    document.addEventListener('DOMContentLoaded', () => {
+                        let editor = monaco.editor.create($el, {
+                            value: content,
+                            language: 'handlebars',
+                            automaticLayout: true,
+                        });
+                    });
+                    "
+                    wire:ignore
+                    class="h-full w-full"
+                ></div>
+            </div>
             <div class="container">
                 <div name="idconn" id="idconn"></div>
                 <div id="terminal" style="width:100%; height:90vh"></div>
@@ -171,6 +187,7 @@
                     wSocket = new WebSocket("ws:localhost:8090");
                     term.open(document.getElementById('terminal'));
                     document.getElementById("terminal").style.visibility="visible";
+
                     document.getElementById("idconn").innerHTML = "Your id connection is " + idconnection;
                     var dataSend = {"auth":
                             {
@@ -178,7 +195,7 @@
                                 "server":"host.docker.internal",
                                 "port":"22",
                                 "user":"igorhaf",
-                                "password":'',
+                                "password":'Tatyruga@2008',
                             }
                     };
                     term.fit();
@@ -234,9 +251,16 @@
                         term.fit()
                     }
                 }
+                $('.xterm-viewport').hide();
+                $('.xterm-selection-layer').hide();
+                $('.xterm-link-layer').hide();
+                $('.xterm-cursor-layer').hide();
+                $('.xterm-helper-textarea').css('height', '1px');
+                $('.xterm-helper-textarea').css('border', 'none');
             </script>
         </div>
     </div>
 </div>
+<livewire:scripts />
 </body>
 </html>
