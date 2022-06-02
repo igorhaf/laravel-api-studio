@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,20 +11,21 @@ const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+/*mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         //
-    ]).vue();
+    ])*/
 mix.copy("node_modules/xterm/lib/xterm.js", 'public/javascript/vendors/xterm.js');
 mix.copy("node_modules/xterm/css/xterm.css", 'public/css/vendors/xterm.css');
 
-mix.js('resources/js/monaco.js', 'public/js')
-mix.webpackConfig({
-    plugins: [
-        new MonacoWebpackPlugin({
-            languages: ['handlebars', 'html'],
-            features: ['accessibilityHelp', 'anchorSelect', 'bracketMatching', 'caretOperations', 'folding', 'format'],
-            globalAPI: true,
-        })
-    ]
-});
+mix.js('resources/js/app.js', 'public/js')
+    .sass('resources/scss/app.scss', 'public/css')
+    .webpackConfig({
+        plugins: [
+            new MonacoWebpackPlugin({
+                languages: ['css', 'html', 'javascript', 'json', 'scss', 'typescript'],
+            }),
+        ],
+    })
+    .copyDirectory('node_modules/monaco-editor', 'public/vendors/monaco');
+

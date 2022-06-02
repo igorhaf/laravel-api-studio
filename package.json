@@ -16,12 +16,13 @@
         "monaco-editor": "^0.33.0",
         "monaco-editor-webpack-plugin": "^7.0.1",
         "postcss": "^8.1.14",
-        "vue-loader": "^16.8.3",
-        "vue-shell": "^1.0.3"
+        "resolve-url-loader": "^5.0.0",
+        "sass": "^1.52.1",
+        "sass-loader": "^12.6.0",
+        "xterm": "^4.18.0"
     },
     "dependencies": {
-        "vue": "^3.2.36",
-        "vue-terminal": "^1.2.0",
-        "xterm": "^4.18.0"
+        "@ztree/ztree_v3": "^3.5.48",
+        "jqueryfiletree": "^2.1.4"
     }
 }

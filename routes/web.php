@@ -14,3 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [\App\Http\Controllers\MainController::class, 'index']);
+Route::get('/prot', [\App\Http\Controllers\MainController::class, 'index']);
+Route::any('/filetree', [\App\Http\Controllers\MainController::class, 'filetree']);
+Route::get('/livewire', \App\Http\Livewire\Counter::class);
