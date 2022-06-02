@@ -1,7 +1,4 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/js/monaco.js": "/js/monaco.js",
-    "/css/app.css": "/css/app.css",
-    "/javascript/vendors/xterm.js": "/javascript/vendors/xterm.js",
-    "/css/vendors/xterm.css": "/css/vendors/xterm.css"
+    "/js/app.js": "/js/app.js?id=c2a599590b7f4daeeb949d3d8d914a31",
+    "/css/app.css": "/css/app.css?id=cca578380f96d472dddfb4abee4cd0cd"
 }
