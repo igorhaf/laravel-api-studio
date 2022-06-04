@@ -29,6 +29,7 @@
         <main role="main" class="w-full flex-grow px-3 pt-1">
             <div>
                <monacoeditor-component></monacoeditor-component>
+               <terminal-component></terminal-component>
             </div>
         </main>
         <div class="w-fixed w-96 flex-shrink flex-grow-0 px-2">

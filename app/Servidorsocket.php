@@ -54,6 +54,10 @@ class Servidorsocket implements MessageComponentInterface
     {
 
         $data = json_decode($msg, true);
+        if(!is_array($data)){
+            $data = array();
+            $data = $data['data'] = $data;
+        }
         switch (key($data)) {
             case 'data':
                 fwrite($this->shell[$from->resourceId], $data['data']['data']);

@@ -1,6 +1,8 @@
 const mix = require('laravel-mix');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const webpack = require('webpack');
 require('mix-tailwindcss'); /* Add this line at the top */
+
 
 /*
  |--------------------------------------------------------------------------
@@ -23,6 +25,15 @@ mix.js('resources/js/app.js', 'public/js')
             new MonacoWebpackPlugin({
                 languages: ['css', 'html', 'javascript', 'json', 'scss', 'typescript'],
             }),
+            new webpack.ProvidePlugin({
+                '$': 'jquery',
+                'jQuery': 'jquery',
+                'window.jQuery': 'jquery',
+            }),
         ],
     });
+mix.js([
+    'node_modules/xterm/lib/xterm.js'], 'public/js/app.js'
+);
+mix.css('node_modules/xterm/css/xterm.css', 'public/css/app.css');
 
