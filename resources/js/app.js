@@ -1,12 +1,10 @@
 require('./bootstrap');
 
 import { createApp } from 'vue';
-import ExampleComponent from './components/ExampleComponent.vue';
-import AnotherComponent from './components/AnotherComponent.vue';
+import MonacoeditorComponent from './components/MonacoeditorComponent.vue';
 
 let app=createApp({})
 
-app.component('ExampleComponent' , ExampleComponent);
-app.component('AnotherComponent' , AnotherComponent);
+app.component('MonacoeditorComponent' , MonacoeditorComponent);
 
 app.mount("#app")
