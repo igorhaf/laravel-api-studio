@@ -1,5 +1,5 @@
 <template>
-    <div class="w-screen h-screen flex flex-col items-center justify-center">
+    <div class="flex-col justify-center">
         <h1 class="text-2x1 text-semi-bold">file explorer</h1>
         <div class="w-4/12 mt-8">
             <treeview-component :items="treeviewItens" />

@@ -23,14 +23,13 @@
     <div class="flex w-full flex-grow flex-col flex-wrap py-4 sm:flex-row sm:flex-nowrap">
         <div class="w-fixed  w-96  flex-shrink flex-grow-0 px-4">
             <div class="sticky top-0 h-full w-full rounded-xl bg-gray-100 p-4">
-
+                <fileexplorer-component></fileexplorer-component>
             </div>
         </div>
         <main role="main" class="w-full flex-grow px-3 pt-1">
             <div>
-                <fileexplorer-component></fileexplorer-component>
-               <monacoeditor-component></monacoeditor-component>
-               <terminal-component></terminal-component>
+                <monacoeditor-component></monacoeditor-component>
+                <terminal-component></terminal-component>
             </div>
         </main>
         <div class="w-fixed w-96 flex-shrink flex-grow-0 px-2">
