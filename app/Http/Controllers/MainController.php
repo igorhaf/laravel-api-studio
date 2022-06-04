@@ -62,6 +62,12 @@ class MainController extends Controller
             }
         }
     }
+
+    //tailwind
+    public function tailwind()
+    {
+        return view('tailwind');
+    }
     public function index()
     {
         return view('index', [
