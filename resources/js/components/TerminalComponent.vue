@@ -34,8 +34,6 @@ export default {
         };
         term.focus();
         wSocket.onopen = function (event) {
-            console.log("Socket Open");
-            //term.attach(wSocket,false,false);
             wSocket.send(JSON.stringify(dataSend));
 
             intervalId = window.setInterval(function(){
@@ -51,7 +49,6 @@ export default {
             var dataSend = {"data":{"data":data}};
 
             wSocket.send(JSON.stringify(dataSend));
-            //Xtermjs with attach dont print zero, so i force. Need to fix it :(
             if (data=="0"){
                 term.write(data);
             }

@@ -28,6 +28,7 @@
         </div>
         <main role="main" class="w-full flex-grow px-3 pt-1">
             <div>
+                <fileexplorer-component></fileexplorer-component>
                <monacoeditor-component></monacoeditor-component>
                <terminal-component></terminal-component>
             </div>

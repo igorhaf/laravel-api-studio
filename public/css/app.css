@@ -604,6 +604,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-16 {
   height: 4rem;
 }
+.h-screen {
+  height: 100vh;
+}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -627,6 +630,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-auto {
   width: auto;
+}
+.w-screen {
+  width: 100vw;
+}
+.w-4\/12 {
+  width: 33.333333%;
 }
 .min-w-0 {
   min-width: 0px;
@@ -727,6 +736,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .rounded-full {
   border-radius: 9999px;
+}
+.rounded {
+  border-radius: 0.25rem;
 }
 .rounded-l-lg {
   border-top-left-radius: 0.5rem;
@@ -940,6 +952,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
+.hover\:bg-teal-50:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(240 253 250 / var(--tw-bg-opacity));
+}
 .hover\:text-gray-700:hover {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
@@ -947,6 +963,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hover\:text-indigo-700:hover {
   --tw-text-opacity: 1;
   color: rgb(67 56 202 / var(--tw-text-opacity));
+}
+.hover\:text-teal-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(13 148 136 / var(--tw-text-opacity));
 }
 .focus\:z-10:focus {
   z-index: 10;
