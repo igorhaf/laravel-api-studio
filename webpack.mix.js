@@ -36,4 +36,6 @@ mix.js([
     'node_modules/xterm/lib/xterm.js'], 'public/js/app.js'
 );
 mix.css('node_modules/xterm/css/xterm.css', 'public/css/app.css');
+mix.copy('node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2', 'public/css/fonts')
+mix.copy('node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff', 'public/css/fonts')
 

@@ -1,5 +1,6 @@
 require('./bootstrap');
 
+
 import { createApp } from 'vue';
 import MonacoeditorComponent from './components/MonacoeditorComponent.vue';
 import TerminalComponent from './components/TerminalComponent.vue';
