@@ -64,24 +64,9 @@ class MainController extends Controller
     }
 
     //tailwind
-    public function tailwind()
-    {
-        return view('tailwind');
-    }
     public function index()
     {
         return view('index', [
-            'name' => 'main',
-            'ip' => '127.0.0.1',
-            'port' => '22',
-            'user' => 'root',
-            'password' => '',
-            'websocketurl' => env("WEBSOCKET_URL", "localhost"),
-        ]);
-    }
-    public function prot()
-    {
-        return view('prototip', [
             'name' => 'main',
             'ip' => '127.0.0.1',
             'port' => '22',
