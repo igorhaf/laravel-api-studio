@@ -1,37 +1,38 @@
 <template>
-    <div class="flex-col justify-center">
-        <h1 class="text-2x1 text-semi-bold">file explorer</h1>
-        <div class="w-4/12 mt-8">
-            <treeview-component :items="treeviewItens" @change-selection="onChengeSelection" />
-        </div>
-    </div>
+    <tree :nodes="nodes" :config="config"></tree>
 </template>
 
 <script>
-import Treeview from "./TreeviewComponent";
+import treeview from "vue3-treeview";
+import "vue3-treeview/dist/style.css";
 
 export default {
-    name: 'FileExplorer',
-    components: {Treeview},
-    data(){
-        return {
-            treeviewItens:[
-                {
-                    key: '234234234',
-                    title: "primeiro item",
-                    children: {
-                        key: '234234234qe2qw',
-                        title: 'primeiro filho'
-                    }
-                },
-                {
-                    key: '234234234',
-                    title: "segund item"
-                }
-            ]
-        }
+    components: {
+        tree: treeview,
     },
-}
+    data() {
+        return {
+            config: {
+                roots: ["id1", "id2"],
+            },
+            nodes: {
+                id1: {
+                    text: "text1",
+                    children: ["id11", "id12"],
+                },
+                id11: {
+                    text: "text11",
+                },
+                id12: {
+                    text: "text12",
+                },
+                id2: {
+                    text: "text2",
+                },
+            },
+        };
+    },
+};
 
 </script>
 <style>
