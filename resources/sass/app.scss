@@ -2,3 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 @import '~bootstrap-icons/font/bootstrap-icons';
+
+#sidebar-left{
+    background-color: #3c3f41;
+}
+.node-text{
+    color: #e2e8f0;
+}
+.node-wrapper{
+    color: #3c3f41;
+}
+.php-icon{
+    width: 24px;
+    height: 24px;
+    background: url(../assets/icons/php.svg) no-repeat top left;
+    background-size: contain;
+}
+
+.css-icon{
+    width: 24px;
+    height: 24px;
+    background: url(../assets/icons/css.svg) no-repeat top left;
+    background-size: contain;
+}
+
+.blade-icon{
+    width: 24px;
+    height: 24px;
+    background: url(../assets/icons/blade.svg) no-repeat top left;
+    background-size: contain;
+}
+
+.javascript-icon{
+    width: 24px;
+    height: 24px;
+    background: url(../assets/icons/javascript.svg) no-repeat top left;
+    background-size: contain;
+}
+
+.others-icon{
+    width: 24px;
+    height: 24px;
+    background: url(../assets/icons/others.svg) no-repeat top left;
+    background-size: contain;
+}
+
+.folder-closed-icon{
+    width: 24px;
+    height: 24px;
+    background: url(../assets/icons/folder-closed.svg) no-repeat top left;
+    background-size: contain;
+}
+.folder-opened-icon{
+    width: 24px;
+    height: 24px;
+    background: url(../assets/icons/folder-opened.svg) no-repeat top left;
+    background-size: contain;
+}
+
