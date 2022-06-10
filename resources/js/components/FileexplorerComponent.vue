@@ -1,7 +1,7 @@
 <template>
     <tree :config="config" :nodes="nodes">
         <template #before-input="props">
-            <i class="folder-opened-icon" v-if="checkProp(props.node, 0)" />
+            <i class="folder-closed-icon" v-if="checkProp(props.node, 0)" />
             <i class="php-icon" v-else-if="checkProp(props.node, 1)" />
             <i class="css-icon" v-else-if="checkProp(props.node, 2)" />
             <i class="javascript-icon" v-else-if="checkProp(props.node, 3)" />
@@ -76,6 +76,14 @@ export default {
             },
             config: {
                 roots: ["id1", "id2"],
+                openedIcon: {
+                    type: "class",
+                    class: "opened-folder",
+                },
+                closedIcon: {
+                    type: "class",
+                    class: "closed-folder",
+                },
             },
         };
     },

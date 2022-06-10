@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="flex w-full flex-grow flex-col flex-wrap py-4 sm:flex-row sm:flex-nowrap">
+    <div id="body-color" class="flex w-full flex-grow flex-col flex-wrap py-4 sm:flex-row sm:flex-nowrap">
         @include('partials.sidebar-file-explorer')
         <main role="main" class="w-full  flex-grow px-3 pt-1">
 

@@ -10,7 +10,8 @@ export default {
         monaco.editor.create(document.getElementById("monaco-editor-container"), {
             value: "function hello() {\n\talert('Hello world!');\n}",
             language: "python",
-            automaticLayout: true
+            automaticLayout: true,
+            theme: 'vs-dark'
         });
     }
 }
