@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [\App\Http\Controllers\MainController::class, 'index']);
-Route::any('/filetree', [\App\Http\Controllers\MainController::class, 'filetree']);
+Route::any('/filetree', [\App\Http\Controllers\MainController::class, 'filetree'])->name('filetree');
 Route::post('/file', [\App\Http\Controllers\MainController::class, 'getFile']);

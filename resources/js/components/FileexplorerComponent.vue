@@ -1,13 +1,14 @@
 <template>
-    <tree :config="config" :nodes="nodes">
-        <template #before-input="props">
+
+<!--        <template #before-input="props">
             <i class="folder-closed-icon" v-if="checkProp(props.node, 0)" />
             <i class="php-icon" v-else-if="checkProp(props.node, 1)" />
             <i class="css-icon" v-else-if="checkProp(props.node, 2)" />
             <i class="javascript-icon" v-else-if="checkProp(props.node, 3)" />
             <i class="blade-icon" v-else-if="checkProp(props.node, 4)" />
             <i class="others-icon" v-else></i>
-        </template>
+        </template>-->
+    <tree :nodes="nodes" :config="config" @nodeOpened="addServerNode">
         <template #loading-slot>
             <div class="progress">
                 <div class="indeterminate"></div>
@@ -25,7 +26,29 @@ export default {
         tree: treeview,
     },
     data: function () {
+
         return {
+            nodes: {
+                id1: {
+                    text: "text1",
+                    children: ["id11", "id12"],
+                },
+                id11: {
+                    text: "text11",
+                },
+                id12: {
+                    text: "text12",
+                },
+                id2: {
+                    text: "text2",
+                },
+            },
+            config: {
+                roots: ["id1", "id2"],
+                leaves: ["fakeid"],
+            },
+        }
+        /*return {
             nodes: {
                 id1: {
                     text: "folder",
@@ -90,24 +113,7 @@ export default {
                     class: "closed-folder",
                 },
             },
-        };
-    },
-    created: function () {
-        const _this = this;
-        $.ajax({
-            url: "http://localhost/filetree",
-            method:"post",
-            data: JSON.stringify(['url_dir']), // Replace 'this' with self''
-            contentType: 'application/json',
-            dataType: 'json',
-            context: this,
-            success: function(res) {
-                console.log(res)
-            }
-        });
-        $.getJSON('http://localhost/filetree', function (json) {
-            _this.json = json;
-        });
+        };*/
     },
     methods: {
         checkProp(n, i) {
@@ -116,7 +122,7 @@ export default {
 
         addServerNode(n) {
 
-            console.log("tata");
+
 
             if (n.children && n.children.length > 0) return;
 
@@ -126,17 +132,24 @@ export default {
             // fake server call
             setTimeout(() => {
                 // create a fake node
-                const id = `${Date.now()}`;
-                const newNode = {
-                    text: `loaded from server`,
-                    children: [],
-                    state: {},
-                };
 
-                // add the node to nodes
-                this.nodes[id] = newNode;
-                // set children
-                n.children = [id];
+            $.ajax({
+                url: "http://localhost/filetree",
+                method:"post",
+                data: JSON.stringify(['url_dir']), // Replace 'this' with self''
+                contentType: 'application/json',
+                dataType: 'json',
+                context: this,
+                success: function(json) {
+                    let nodes;
+                    nodes = JSON.parse(JSON.stringify(json))
+                    $.each(nodes, function(k, v) {
+                        // add the node to nodes
+                        this.nodes[k] = v;
+                    })
+                }
+            });
+
                 // end loading
                 n.state.isLoading = false;
             }, 2000);

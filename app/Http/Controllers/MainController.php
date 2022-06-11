@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Ratchet\MessageComponentInterface;
-use Ratchet\ConnectionInterface;
+use Illuminate\Support\Str;
 
 class MainController extends Controller
 {
@@ -29,11 +27,24 @@ class MainController extends Controller
     }
     function getNodes($dir){
         $files = array();
+
+        //$uniqid = Str::random(9);
         foreach(\File::directories($dir) as $dir) { // Get all the directories
-            $files[$dir][] = pathinfo($dir);
+            $uniqid = Str::random(9);
+            $file =  pathinfo($dir);
+            //$files[$dir][$uniqid]['folder'] = $file['dirname'];
+            $files[$uniqid] = array();
+            $files[$uniqid]['text'] = $file['filename'];
+            $files[$uniqid]['custom']['prop'] = 0;
         }
         foreach (\File::files($dir, true) as $file_path){
-            $files[$dir][] = pathinfo($file_path);
+            $uniqid = Str::random(9);
+            $file =  pathinfo($file_path);
+            //$files[$uniqid]['folder'] = $file['dirname'];
+            $files[$uniqid] = array();
+            $files[$uniqid]['text'] = $file['filename'].".".$file['extension'];
+            $files[$uniqid]['custom']['prop'] = 1;
+
         }
         return $files;
     }
