@@ -101,12 +101,6 @@ export default {
         if (term) {
             fitAddon.fit()
         }
-        /*$('.xterm-viewport').hide();
-        $('.xterm-selection-layer').hide();
-        $('.xterm-link-layer').hide();
-        $('.xterm-cursor-layer').hide();
-        $('.xterm-helper-textarea').css('height', '1px');
-        $('.xterm-helper-textarea').css('border', 'none');*/
     }
 }
 

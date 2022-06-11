@@ -27,12 +27,21 @@ class MainController extends Controller
             'websocketurl' => env("WEBSOCKET_URL", "localhost"),
         ]);
     }
+    function getNodes($dir){
+        $files = array();
+        foreach(\File::directories($dir) as $dir) { // Get all the directories
+            $files[$dir][] = pathinfo($dir);
+        }
+        foreach (\File::files($dir, true) as $file_path){
+            $files[$dir][] = pathinfo($file_path);
+        }
+        return $files;
+    }
     public function filetree(Request $request)
     {
-        $files = Storage::disk('public')->listContents('/');
-        var_dump($files);
+        $files = $this->getNodes(base_path().$request->dir);
+        return response()->json($files);
     }
-
     //tailwind
     public function index()
     {
