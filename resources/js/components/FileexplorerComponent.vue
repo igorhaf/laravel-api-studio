@@ -1,18 +1,19 @@
 <template>
 
-<!--        <template #before-input="props">
+
+    <tree :nodes="nodes" :config="config" @nodeOpened="addServerNode">
+        <template #loading-slot>
+            <div class="progress">
+                <div class="indeterminate"></div>
+            </div>
+        </template>
+        <template #before-input="props">
             <i class="folder-closed-icon" v-if="checkProp(props.node, 0)" />
             <i class="php-icon" v-else-if="checkProp(props.node, 1)" />
             <i class="css-icon" v-else-if="checkProp(props.node, 2)" />
             <i class="javascript-icon" v-else-if="checkProp(props.node, 3)" />
             <i class="blade-icon" v-else-if="checkProp(props.node, 4)" />
             <i class="others-icon" v-else></i>
-        </template>-->
-    <tree :nodes="nodes" :config="config" @nodeOpened="addServerNode">
-        <template #loading-slot>
-            <div class="progress">
-                <div class="indeterminate"></div>
-            </div>
         </template>
     </tree>
 </template>
@@ -122,9 +123,9 @@ export default {
 
         addServerNode(n) {
 
+            const self = this;
 
-
-            if (n.children && n.children.length > 0) return;
+            //if (n.children && n.children.length > 0) return;
 
             // set node loading state to tree
             n.state.isLoading = true;
@@ -133,23 +134,25 @@ export default {
             setTimeout(() => {
                 // create a fake node
 
-            $.ajax({
-                url: "http://localhost/filetree",
-                method:"post",
-                data: JSON.stringify(['url_dir']), // Replace 'this' with self''
-                contentType: 'application/json',
-                dataType: 'json',
-                context: this,
-                success: function(json) {
-                    let nodes;
-                    nodes = JSON.parse(JSON.stringify(json))
-                    $.each(nodes, function(k, v) {
-                        // add the node to nodes
-                        this.nodes[k] = v;
-                    })
-                }
-            });
+                $.ajax({
+                    url: "http://localhost/filetree",
+                    method:"post",
+                    data: JSON.stringify(['url_dir']), // Replace 'this' with self''
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    context: this,
+                    success: function(json) {
+                        let nodes;
 
+                        nodes = JSON.parse(JSON.stringify(json))
+                        $.each(nodes, function(k, v) {
+                            // add the node to nodes
+                            console.log(v);
+                            self.nodes[k] = v;
+                            n.children = [k];
+                        })
+                    }
+                });
                 // end loading
                 n.state.isLoading = false;
             }, 2000);

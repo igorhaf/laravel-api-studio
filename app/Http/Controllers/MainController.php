@@ -35,6 +35,8 @@ class MainController extends Controller
             //$files[$dir][$uniqid]['folder'] = $file['dirname'];
             $files[$uniqid] = array();
             $files[$uniqid]['text'] = $file['filename'];
+            $files[$uniqid]['children'] = [];
+            $files[$uniqid]['state'] = new \stdClass();
             $files[$uniqid]['custom']['prop'] = 0;
         }
         foreach (\File::files($dir, true) as $file_path){
@@ -43,6 +45,8 @@ class MainController extends Controller
             //$files[$uniqid]['folder'] = $file['dirname'];
             $files[$uniqid] = array();
             $files[$uniqid]['text'] = $file['filename'].".".$file['extension'];
+            $files[$uniqid]['children'] = [];
+            $files[$uniqid]['state'] = new \stdClass();
             $files[$uniqid]['custom']['prop'] = 1;
 
         }
