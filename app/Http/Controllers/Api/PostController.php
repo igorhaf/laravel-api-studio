@@ -22,7 +22,7 @@ class PostController extends Controller
 
         return response()->json([
             'status' => true,
-            'posts' => $posts
+            'posts' => $posts,
         ]);
     }
 
@@ -39,7 +39,7 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param StorePostRequest $request
+     * @param  StorePostRequest  $request
      * @return JsonResponse
      */
     public function store(StorePostRequest $request): JsonResponse
@@ -48,15 +48,15 @@ class PostController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => "Post Created successfully!",
-            'post' => $post
+            'message' => 'Post Created successfully!',
+            'post' => $post,
         ], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param Post $post
+     * @param  Post  $post
      * @return void
      */
     public function show(Post $post)
@@ -67,7 +67,7 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Post $post
+     * @param  Post  $post
      * @return void
      */
     public function edit(Post $post)
@@ -78,8 +78,8 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param StorePostRequest $request
-     * @param Post $post
+     * @param  StorePostRequest  $request
+     * @param  Post  $post
      * @return JsonResponse
      */
     public function update(StorePostRequest $request, Post $post)
@@ -88,15 +88,15 @@ class PostController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => "Post Updated successfully!",
-            'post' => $post
+            'message' => 'Post Updated successfully!',
+            'post' => $post,
         ], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Post $post
+     * @param  Post  $post
      * @return JsonResponse
      */
     public function destroy(Post $post): JsonResponse
@@ -105,7 +105,7 @@ class PostController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => "Post Deleted successfully!",
+            'message' => 'Post Deleted successfully!',
         ], 200);
     }
 }

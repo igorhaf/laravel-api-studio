@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
         ModuleProviderMakeCommand::class,
         ModuleMakeCommand::class,
         ModuleApiControllerMake::class,
-        ModuleMigrationMake::class
+        ModuleMigrationMake::class,
     ];
 
     /**

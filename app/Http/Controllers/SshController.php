@@ -12,14 +12,14 @@ class SshController extends Controller
             'port' => '22',
             'user' => 'root',
             'password' => '',
-            'websocketurl' => env("WEBSOCKET_URL", "localhost"),
+            'websocketurl' => env('WEBSOCKET_URL', 'localhost'),
         ]);
     }
 
     public function sharessh()
     {
         return view('ssh/share-ssh', [
-            'websocketurl' => env("WEBSOCKET_URL", "localhost"),
+            'websocketurl' => env('WEBSOCKET_URL', 'localhost'),
         ]);
     }
 }

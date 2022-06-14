@@ -28,7 +28,7 @@ class ModuleMakeCommand extends Command
      */
     public function handle()
     {
-        Artisan::call("module:make:provider", ['name' => $this->argument('name'), 'module_name' => $this->argument('name')]);
-        Artisan::call("module:make:api:controller", ['name' => $this->argument('name'), 'module_name' => $this->argument('name')]);
+        Artisan::call('module:make:provider', ['name' => $this->argument('name'), 'module_name' => $this->argument('name')]);
+        Artisan::call('module:make:api:controller', ['name' => $this->argument('name'), 'module_name' => $this->argument('name')]);
     }
 }

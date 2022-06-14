@@ -22,11 +22,12 @@ class StorePostRequest extends FormRequest
      *
      * @return array
      */
-    #[ArrayShape(["title" => "string", "description" => "string"])] public function rules(): array
-    {
-        return [
-            "title" => "required|max:70",
-            "description" => "required"
-        ];
-    }
+    #[ArrayShape(['title' => 'string', 'description' => 'string'])]
+ public function rules(): array
+ {
+     return [
+         'title' => 'required|max:70',
+         'description' => 'required',
+     ];
+ }
 }

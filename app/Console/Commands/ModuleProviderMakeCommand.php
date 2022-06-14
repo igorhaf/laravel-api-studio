@@ -36,10 +36,9 @@ class ModuleProviderMakeCommand extends FileGeneratorCommand
 
     /**
      **
-     * Map the stub variables present in stub to its value
+     * Map the stub variables present in stub to its value.
      *
      * @return array
-     *
      */
     public function getStubVariables()
     {
@@ -48,6 +47,4 @@ class ModuleProviderMakeCommand extends FileGeneratorCommand
             'class'        => $this->getSingularClassName($this->argument('name')).$this->suffix,
         ];
     }
-
-
 }

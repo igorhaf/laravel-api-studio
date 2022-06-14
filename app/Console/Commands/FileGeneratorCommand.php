@@ -39,47 +39,49 @@ class FileGeneratorCommand extends Command
 
         $contents = $this->getSourceFile();
 
-        if (!$this->files->exists($path)) {
+        if (! $this->files->exists($path)) {
             $this->files->put($path, $contents);
             $this->info("File : {$path} created");
         } else {
             $this->info("File : {$path} already exits");
         }
     }
+
     /**
-     * Get the full path of generate class
+     * Get the full path of generate class.
      *
      * @return string
      */
     public function getSourceFilePath()
     {
-        if(!empty($this->prefix)){
+        if (! empty($this->prefix)) {
             $prefix = $this->prefix;
-        }else{
+        } else {
             $prefix = null;
         }
-        if(!empty($this->suffix)){
+        if (! empty($this->suffix)) {
             $suffix = $this->suffix;
-        }else{
+        } else {
             $suffix = null;
         }
         $this->module_in_file = $this->getSingularClassName($this->argument('name'));
-        if($this->module_in_file == false){
+        if ($this->module_in_file == false) {
             $module_in_file = $this->getSingularClassName($this->argument('name'));
-        }else{
+        } else {
             $module_in_file = $this->argument('name');
         }
-        if($this->timestamp_in_file == true){
+        if ($this->timestamp_in_file == true) {
             $timestamp_in_file = date('Y_m_d_His').'_';
-        }else{
+        } else {
             $timestamp_in_file = null;
         }
 
-        return app_path('Modules') .'/' .$this->argument('module_name').'/'.$this->type.'/' .$timestamp_in_file.$module_in_file . $prefix .$suffix.'.php';
+        return app_path('Modules').'/'.$this->argument('module_name').'/'.$this->type.'/'.$timestamp_in_file.$module_in_file.$prefix.$suffix.'.php';
     }
 
     /**
-     * Return the Singular Capitalize Name
+     * Return the Singular Capitalize Name.
+     *
      * @param $name
      * @return string
      */
@@ -99,32 +101,32 @@ class FileGeneratorCommand extends Command
         if (! $this->files->isDirectory($path)) {
             $this->files->makeDirectory($path, 0777, true, true);
         }
+
         return $path;
     }
 
     /**
-     * Replace the stub variables(key) with the desire value
+     * Replace the stub variables(key) with the desire value.
      *
      * @param $stub
-     * @param array $stubVariables
+     * @param  array  $stubVariables
      * @return bool|mixed|string
      */
-    public function getStubContents($stub , $stubVariables = [])
+    public function getStubContents($stub, $stubVariables = [])
     {
         $contents = file_get_contents($stub);
 
-        foreach ($stubVariables as $search => $replace)
-        {
-            $contents = str_replace('{{ '.$search.' }}' , $replace, $contents);
+        foreach ($stubVariables as $search => $replace) {
+            $contents = str_replace('{{ '.$search.' }}', $replace, $contents);
         }
+
         return $contents;
     }
 
     /**
-     * Get the stub path and the stub variables
+     * Get the stub path and the stub variables.
      *
      * @return bool|mixed|string
-     *
      */
     public function getSourceFile()
     {
@@ -133,7 +135,8 @@ class FileGeneratorCommand extends Command
 
     /**
      * Create a new command instance.
-     * @param Filesystem $files
+     *
+     * @param  Filesystem  $files
      */
     public function __construct(Filesystem $files)
     {
@@ -143,16 +146,14 @@ class FileGeneratorCommand extends Command
     }
 
     /**
-     * Return the stub file path
-     * @return string
+     * Return the stub file path.
      *
+     * @return string
      */
     public function getStubPath()
     {
-        return __DIR__ . '/../../../stubs/'.$this->stub_file.'.stub';
+        return __DIR__.'/../../../stubs/'.$this->stub_file.'.stub';
     }
-
-
 
     /**
      * Get the default namespace for the class.
