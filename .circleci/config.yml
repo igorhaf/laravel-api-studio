@@ -7,7 +7,7 @@ jobs:
   test:
     docker:
       # Specify the version you desire here
-      - image: sail-8.1/app
+      - image: cimg/php:8.1.7
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
