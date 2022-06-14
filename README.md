@@ -2,8 +2,6 @@
      <a href="https://styleci.io/repos/48796179">
         <img src="https://styleci.io/repos/498436872/shield" alt="StyleCI">
     </a>
-    [![CircleCI Build Status][(https://circleci.com/gh/CircleCI-Public/slack-orb.svg](https://circleci.com/gh/igorhaf/laravel-api-studio/tree/main.svg?style=svg)?style=shield "CircleCI Build Status")]
-    
     <a href="https://circleci.com/gh/igorhaf/laravel-api-studio/tree/main"><img src="https://circleci.com/gh/igorhaf/laravel-api-studio/tree/main.svg?style=svg"></a>
 </div>
 
