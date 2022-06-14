@@ -15,48 +15,53 @@ class MainController extends Controller
             'port' => '22',
             'user' => 'root',
             'password' => '',
-            'websocketurl' => env("WEBSOCKET_URL", "localhost"),
+            'websocketurl' => env('WEBSOCKET_URL', 'localhost'),
         ]);
     }
 
     public function sharessh()
     {
         return view('ssh/share-ssh', [
-            'websocketurl' => env("WEBSOCKET_URL", "localhost"),
+            'websocketurl' => env('WEBSOCKET_URL', 'localhost'),
         ]);
     }
-    function getNodes($dir){
-        $files = array();
+
+    public function getNodes($dir)
+    {
+        $files = [];
 
         //$uniqid = Str::random(9);
-        foreach(\File::directories($dir) as $dir) { // Get all the directories
+        foreach (\File::directories($dir) as $dir) { // Get all the directories
             $uniqid = Str::random(9);
-            $file =  pathinfo($dir);
+            $file = pathinfo($dir);
             //$files[$dir][$uniqid]['folder'] = $file['dirname'];
-            $files[$uniqid] = array();
+            $files[$uniqid] = [];
             $files[$uniqid]['text'] = $file['filename'];
             $files[$uniqid]['children'] = [];
             $files[$uniqid]['state'] = new \stdClass();
             $files[$uniqid]['custom']['prop'] = 0;
         }
-        foreach (\File::files($dir, true) as $file_path){
+        foreach (\File::files($dir, true) as $file_path) {
             $uniqid = Str::random(9);
-            $file =  pathinfo($file_path);
+            $file = pathinfo($file_path);
             //$files[$uniqid]['folder'] = $file['dirname'];
-            $files[$uniqid] = array();
-            $files[$uniqid]['text'] = $file['filename'].".".$file['extension'];
+            $files[$uniqid] = [];
+            $files[$uniqid]['text'] = $file['filename'].'.'.$file['extension'];
             $files[$uniqid]['children'] = [];
             $files[$uniqid]['state'] = new \stdClass();
             $files[$uniqid]['custom']['prop'] = 1;
-
         }
+
         return $files;
     }
+
     public function filetree(Request $request)
     {
         $files = $this->getNodes(base_path().$request->dir);
+
         return response()->json($files);
     }
+
     //tailwind
     public function index()
     {
@@ -66,7 +71,7 @@ class MainController extends Controller
             'port' => '22',
             'user' => 'root',
             'password' => '',
-            'websocketurl' => env("WEBSOCKET_URL", "localhost"),
+            'websocketurl' => env('WEBSOCKET_URL', 'localhost'),
         ]);
     }
 }

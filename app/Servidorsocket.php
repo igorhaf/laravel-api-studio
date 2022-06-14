@@ -21,8 +21,9 @@
 */
 
 namespace App;
-use Ratchet\MessageComponentInterface;
+
 use Ratchet\ConnectionInterface;
+use Ratchet\MessageComponentInterface;
 
 class Servidorsocket implements MessageComponentInterface
 {
@@ -52,43 +53,42 @@ class Servidorsocket implements MessageComponentInterface
 
     public function onMessage(ConnectionInterface $from, $msg)
     {
-
         $data = json_decode($msg, true);
-        if(!is_array($data)){
-            $data = array();
+        if (! is_array($data)) {
+            $data = [];
             $data = $data['data'] = $data;
         }
         switch (key($data)) {
             case 'data':
                 fwrite($this->shell[$from->resourceId], $data['data']['data']);
                 usleep(800);
-                while($line = fgets($this->shell[$from->resourceId])) {
-                    $from->send(mb_convert_encoding($line, "UTF-8"));
+                while ($line = fgets($this->shell[$from->resourceId])) {
+                    $from->send(mb_convert_encoding($line, 'UTF-8'));
                     $this->resend($line, $from);
                 }
                 break;
             case 'auth':
-                $from->send(mb_convert_encoding("Connecting to ".$data['auth']['server']."....\r\n", "UTF-8"));
+                $from->send(mb_convert_encoding('Connecting to '.$data['auth']['server']."....\r\n", 'UTF-8'));
                 if ($this->connectSSH($data['auth']['idconnection'], $data['auth']['server'], $data['auth']['port'], $data['auth']['user'], $data['auth']['password'], $from)) {
-                    $from->send(mb_convert_encoding("Connected....", "UTF-8"));
-                    while($line = fgets($this->shell[$from->resourceId])) {
-                        $from->send(mb_convert_encoding($line, "UTF-8"));
+                    $from->send(mb_convert_encoding('Connected....', 'UTF-8'));
+                    while ($line = fgets($this->shell[$from->resourceId])) {
+                        $from->send(mb_convert_encoding($line, 'UTF-8'));
                     }
-                }else{
-                    $from->send(mb_convert_encoding("Error, can not connect to the server. Check the credentials\r\n", "UTF-8"));
+                } else {
+                    $from->send(mb_convert_encoding("Error, can not connect to the server. Check the credentials\r\n", 'UTF-8'));
                     $from->close();
                 }
                 break;
             case 'sharessh':
                 //Only root user connection read the connection
-                $this->conectado[$from->resourceId]=false;
-                $this->idConexion[$from->resourceId]=$data['sharessh']['idconnection'];
-                $from->send("You are now viewing the ssh connection id ".$data['sharessh']['idconnection']."\r\n", "UTF-8");
+                $this->conectado[$from->resourceId] = false;
+                $this->idConexion[$from->resourceId] = $data['sharessh']['idconnection'];
+                $from->send('You are now viewing the ssh connection id '.$data['sharessh']['idconnection']."\r\n", 'UTF-8');
                 break;
             default:
                 if ($this->conectado[$from->resourceId]) {
-                    while($line = fgets($this->shell[$from->resourceId])) {
-                        $from->send(mb_convert_encoding($line, "UTF-8"));
+                    while ($line = fgets($this->shell[$from->resourceId])) {
+                        $from->send(mb_convert_encoding($line, 'UTF-8'));
                         $this->resend($line, $from);
                     }
                 }
@@ -104,7 +104,7 @@ class Servidorsocket implements MessageComponentInterface
             }
 
             if ($this->idConexion[$client->resourceId] == $this->idConexion[$from->resourceId]) {
-                $client->send(mb_convert_encoding($line, "UTF-8"));
+                $client->send(mb_convert_encoding($line, 'UTF-8'));
             }
         }
     }
@@ -114,20 +114,23 @@ class Servidorsocket implements MessageComponentInterface
         $this->connection[$from->resourceId] = ssh2_connect($server, $port);
 
         if ($this->connection[$from->resourceId] === false) {
-            $from->send("Error during connection to ".$server." at port ".$port."\r\n", "UTF-8");
+            $from->send('Error during connection to '.$server.' at port '.$port."\r\n", 'UTF-8');
+
             return false;
         }
 
         if (ssh2_auth_password($this->connection[$from->resourceId], $user, $password)) {
-            $from->send("Authentication Successful for server ".$server." at port ".$port."!\r\n", "UTF-8");
-            $from->send("Your id connection is ".$idConnection."\r\n", "UTF-8");
-            $this->shell[$from->resourceId]=ssh2_shell($this->connection[$from->resourceId], 'xterm', null, self::COLS, self::ROWS, SSH2_TERM_UNIT_CHARS);
+            $from->send('Authentication Successful for server '.$server.' at port '.$port."!\r\n", 'UTF-8');
+            $from->send('Your id connection is '.$idConnection."\r\n", 'UTF-8');
+            $this->shell[$from->resourceId] = ssh2_shell($this->connection[$from->resourceId], 'xterm', null, self::COLS, self::ROWS, SSH2_TERM_UNIT_CHARS);
             sleep(1);
-            $this->conectado[$from->resourceId]=true;
-            $this->idConexion[$from->resourceId]=$idConnection;
+            $this->conectado[$from->resourceId] = true;
+            $this->idConexion[$from->resourceId] = $idConnection;
+
             return true;
         } else {
-            $from->send("Wrong username ".$user." and password for server ".$server." at port ".$port."\r\n", "UTF-8");
+            $from->send('Wrong username '.$user.' and password for server '.$server.' at port '.$port."\r\n", 'UTF-8');
+
             return false;
         }
     }
@@ -135,11 +138,11 @@ class Servidorsocket implements MessageComponentInterface
     public function onClose(ConnectionInterface $conn)
     {
         // The connection is closed, remove it, as we can no longer send it messages
-        $this->conectado[$conn->resourceId]=false;
+        $this->conectado[$conn->resourceId] = false;
         $this->clients->detach($conn);
 
         // Gracefully closes terminal, if it exists
-        if(isset($this->shell[$conn->resourceId]) && is_resource($this->shell[$conn->resourceId])) {
+        if (isset($this->shell[$conn->resourceId]) && is_resource($this->shell[$conn->resourceId])) {
             fclose($this->shell[$conn->resourceId]);
             $this->shell[$conn->resourceId] = null;
         }

@@ -42,12 +42,12 @@ class ModuleMigrationMake extends FileGeneratorCommand
 
     protected $timestamp_in_file = true;
     protected bool $module_in_file = false;
+
     /**
      **
-     * Map the stub variables present in stub to its value
+     * Map the stub variables present in stub to its value.
      *
      * @return array
-     *
      */
     public function getStubVariables()
     {

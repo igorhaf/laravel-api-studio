@@ -2,8 +2,8 @@
 
 namespace App\Modules\Authentication\Http\Controllers\Api\v1;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class AuthenticationController extends Controller
 {
