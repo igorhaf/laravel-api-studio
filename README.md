@@ -2,7 +2,7 @@
      <a href="https://styleci.io/repos/48796179">
         <img src="https://styleci.io/repos/498436872/shield" alt="StyleCI">
     </a>
-    <a href="https://circleci.com/gh/igorhaf/laravel-api-studio/tree/main"><img src="https://circleci.com/gh/igorhaf/laravel-api-studio/tree/main.svg?style=svg"></a>
+    <a href="https://circleci.com/gh/igorhaf/laravel-api-studio/tree/main"><img src="https://circleci.com/gh/igorhaf/laravel-api-studio/tree/main.svg?style=shield"></a>
 </div>
 
 ## Welcome to GitHub Pages
