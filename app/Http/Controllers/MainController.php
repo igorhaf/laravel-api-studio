@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Ratchet\MessageComponentInterface;
-use Ratchet\ConnectionInterface;
+use Illuminate\Support\Str;
 
 class MainController extends Controller
 {
@@ -26,43 +25,38 @@ class MainController extends Controller
             'websocketurl' => env("WEBSOCKET_URL", "localhost"),
         ]);
     }
+    function getNodes($dir){
+        $files = array();
+
+        //$uniqid = Str::random(9);
+        foreach(\File::directories($dir) as $dir) { // Get all the directories
+            $uniqid = Str::random(9);
+            $file =  pathinfo($dir);
+            //$files[$dir][$uniqid]['folder'] = $file['dirname'];
+            $files[$uniqid] = array();
+            $files[$uniqid]['text'] = $file['filename'];
+            $files[$uniqid]['children'] = [];
+            $files[$uniqid]['state'] = new \stdClass();
+            $files[$uniqid]['custom']['prop'] = 0;
+        }
+        foreach (\File::files($dir, true) as $file_path){
+            $uniqid = Str::random(9);
+            $file =  pathinfo($file_path);
+            //$files[$uniqid]['folder'] = $file['dirname'];
+            $files[$uniqid] = array();
+            $files[$uniqid]['text'] = $file['filename'].".".$file['extension'];
+            $files[$uniqid]['children'] = [];
+            $files[$uniqid]['state'] = new \stdClass();
+            $files[$uniqid]['custom']['prop'] = 1;
+
+        }
+        return $files;
+    }
     public function filetree(Request $request)
     {
-        $root = public_path() . DIRECTORY_SEPARATOR;
-        $postDir = rawurldecode(public_path($request->get('dir')));
-
-        if (file_exists($postDir))
-        {
-
-            $files = scandir($postDir);
-            $returnDir = substr($postDir, strlen($root));
-            natcasesort($files);
-
-            if (count($files) > 2)
-            { // The 2 accounts for . and ..
-                echo "<ul class='jqueryFileTree'>";
-                foreach ($files as $file)
-                {
-                    $htmlRel = htmlentities($returnDir . $file);
-                    $htmlName = htmlentities($file);
-                    $ext = preg_replace('/^.*\./', '', $file);
-                    if (file_exists($postDir . $file) && $file != '.' && $file != '..')
-                    {
-                        if (is_dir($postDir . $file))
-                        {
-                            echo "<li class='directory collapsed'><a rel='" . $htmlRel . "/'>" . $htmlName . "</a></li>";
-                        }
-                        else
-                        {
-                            echo "<li class='file ext_{$ext}'><a rel='" . $htmlRel . "'>" . $htmlName . "</a></li>";
-                        }
-                    }
-                }
-                echo "</ul>";
-            }
-        }
+        $files = $this->getNodes(base_path().$request->dir);
+        return response()->json($files);
     }
-
     //tailwind
     public function index()
     {

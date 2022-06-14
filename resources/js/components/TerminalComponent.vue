@@ -1,7 +1,7 @@
 <template>
     <div class="py-2">
-        <div name="idconn" id="idconn"></div>
-        <div id="terminal" style="width:100%; height:350px"></div>
+        <div name="idconn" id="idconn" ></div>
+        <div id="terminal"></div>
     </div>
 
 </template>
@@ -9,19 +9,31 @@
 <script>
 import { Terminal } from 'xterm';
 import { AttachAddon } from 'xterm-addon-attach';
+import { FitAddon } from 'xterm-addon-fit';
 
 export default {
 
     mounted() {
         var resizeInterval;
         const wSocket = new WebSocket("ws:localhost:8090");
+        const fitAddon = new FitAddon();
         const attachAddon = new AttachAddon(wSocket);
-        let term = new Terminal();
+        let term = new Terminal(
+            {
+                "theme": {
+                    background: "#1E1E1E"
+                }
+            }
+
+        );
         var password;
         var idconnection = "<?= bin2hex(openssl_random_pseudo_bytes(12)) ?>";
         var intervalId;
         term.loadAddon(attachAddon);
-        term.open(document.getElementById('terminal'));
+        term.loadAddon(fitAddon);
+        term.open(
+            document.getElementById('terminal')
+        );
         document.getElementById("terminal").style.visibility="visible";
         var dataSend = {"auth":
                 {
@@ -81,17 +93,14 @@ export default {
             resizeInterval = setTimeout(resize, 400);
         }
         // Recalculates the terminal Columns / Rows and sends new size to SSH server + xtermjs
-        /*function resize() {
+        function resize() {
             if (term) {
-                term.fit()
+                fitAddon.fit()
             }
-        }*/
-        $('.xterm-viewport').hide();
-        $('.xterm-selection-layer').hide();
-        $('.xterm-link-layer').hide();
-        $('.xterm-cursor-layer').hide();
-        $('.xterm-helper-textarea').css('height', '1px');
-        $('.xterm-helper-textarea').css('border', 'none');
+        }
+        if (term) {
+            fitAddon.fit()
+        }
     }
 }
 
