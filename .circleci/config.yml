@@ -28,11 +28,11 @@ jobs:
 
     steps:
       - checkout
-      - run:
-          name: Install Node
-          command: |
-            curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-            sudo apt-get install -y nodejs
+      #- run:
+      #    name: Install Node
+      #    command: |
+      #      curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+      #      sudo apt-get install -y nodejs
 
       # Download and cache dependencies
 
@@ -51,16 +51,16 @@ jobs:
             - vendor
 
       # node cache
-      - restore_cache:
-          keys:
-            - node-v4-{{ checksum "package.json" }}
-            - node-v4-
-      - run: npm install
-      - save_cache:
-          key: node-v4-{{ checksum "package.json" }}
-          paths:
-            - node_modules
-            - ~/.yarn
+      #- restore_cache:
+      #    keys:
+      #      - node-v4-{{ checksum "package.json" }}
+      #      - node-v4-
+      #- run: npm install
+      #- save_cache:
+      #    key: node-v4-{{ checksum "package.json" }}
+      #    paths:
+      #      - node_modules
+      #      - ~/.yarn
 
       # prepare the database
       - run: touch storage/testing.sqlite
