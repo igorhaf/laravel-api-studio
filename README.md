@@ -5,6 +5,8 @@
     <a href="https://circleci.com/gh/igorhaf/laravel-api-studio/tree/main"><img src="https://circleci.com/gh/igorhaf/laravel-api-studio/tree/main.svg?style=shield"></a>
 </div>
 
+#This project is in WIP, please don't consider using it for now, it's just a future project, follow us for updates on its evolution.
+
 Requirements
 ------------
 - PHP >= 8.0.2
@@ -15,8 +17,14 @@ Other
 `Laravel API Studio` based on following plugins or services:
 
 + [Laravel](https://laravel.com/)
++ [Docker](https://www.docker.com/)
++ [Ratchet](http://socketo.me/)
 + [Tailwind](https://tailwindcss.com)
 + [Monaco editor](https://microsoft.github.io/monaco-editor/)
 + [VueJS](https://vuejs.org/)
 + [Xterm.js](https://xtermjs.org/)
 + [Jquery](https://jquery.com/)
+
+## License
+
+The Laravel API Studio is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
