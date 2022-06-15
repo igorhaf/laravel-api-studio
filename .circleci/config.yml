@@ -1,119 +1,41 @@
-# PHP CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-php/ for more details
-#
 version: 2
 jobs:
-  test:
+  build:
     docker:
       # Specify the version you desire here
-      - image: ubuntu:22.04
-        auth:
-          username: 'igorhaf'  # can specify string literal values
-          password: 'herson123!!!'
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # Using the RAM variation mitigates I/O contention
-      # for database intensive operations.
-      # - image: circleci/mysql:5.7-ram
-      # - image: redis:3
-      - image: circleci/mysql:8.0.20-ram
-        command: mysqld --default-authentication-plugin=mysql_native_password
-        environment:
-          MYSQL_USER: sail
-          MYSQL_DATABASE: imoveis
-          MYSQL_ROOT_PASSWORD: 'password'
-          MYSQL_PASSWORD: 'password'
+      - image: cimg/php:8.1.7
 
     steps:
       - checkout
-      - run:
-          name: Install Node
-          command: |
-            curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-            sudo apt-get install -y nodejs
-      - run:
-          name: Install PHP
-          command: |
-            apt-get update \
-            && apt-get install -y gnupg gosu curl ca-certificates zip unzip git supervisor sqlite3 libcap2-bin libpng-dev python2 \
-            && mkdir -p ~/.gnupg \
-            && chmod 600 ~/.gnupg \
-            && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \
-            && apt-key adv --homedir ~/.gnupg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0x14AA40EC0831756756D7F66C4F4EA0AAE5267A6C \
-            && echo "deb https://ppa.launchpadcontent.net/ondrej/php/ubuntu jammy main" > /etc/apt/sources.list.d/ppa_ondrej_php.list \
-            && apt-get update \
-            && apt-get install -y php8.1-cli php8.1-dev \
-            php8.1-pgsql php8.1-sqlite3 php8.1-gd \
-            php8.1-curl \
-            php8.1-imap php8.1-mysql php8.1-mbstring \
-            php8.1-xml php8.1-zip php8.1-bcmath php8.1-soap \
-            php8.1-intl php8.1-readline \
-            php8.1-ldap \
-            php8.1-ssh2 \
-            php8.1-msgpack php8.1-igbinary php8.1-redis php8.1-swoole \
-            php8.1-memcached php8.1-pcov php8.1-xdebug \
-            && php -r "readfile('https://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
-            && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
-            && apt-get install -y nodejs \
-            && npm install -g npm \
-            && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-            && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
-            && echo "deb http://apt.postgresql.org/pub/repos/apt jammy-pgdg main" > /etc/apt/sources.list.d/pgdg.list \
-            && curl --silent -o - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
-            && apt-get update \
-            && apt-get install -y yarn \
-            && apt-get install -y mysql-client \
-            && apt-get install -y postgresql-client-14 \
-            && apt-get -y autoremove \
-            && apt-get clean \
-            && apt-get install iputils-ping \
-            && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-      # Download and cache dependencies
 
-      # composer cache
+      - run:
+          name: "Prepare Environment"
+          command: |
+            sudo apt update
+            sudo docker-php-ext-install zip
+
+      - run:
+          name: "Create Environment file"
+          command: |
+            mv .env.testing .env
+
+      # Download and cache dependencies
       - restore_cache:
           keys:
-            # "composer.json" can be used if "composer.json"
-            # is not committed to the repository.
-            - composer-v1-{{ checksum "composer.lock" }}
+            # "composer.lock" can be used if it is committed to the repo
+            - v1-dependencies-{{ checksum "composer.json" }}
             # fallback to using the latest cache if no exact match is found
-            - composer-v1-
-      - run: composer install -n --prefer-dist
+            - v1-dependencies-
+
+      - run:
+          name: "Install Dependencies"
+          command: composer install -n --prefer-dist
+
       - save_cache:
-          key: composer-v1-{{ checksum "composer.lock" }}
+          key: v1-dependencies-{{ checksum "composer.json" }}
           paths:
-            - vendor
+            - ./vendor
 
-      # node cache
-      #- restore_cache:
-      #    keys:
-      #      - node-v4-{{ checksum "package.json" }}
-      #      - node-v4-
-      #- run: npm install
-      #- save_cache:
-      #    key: node-v4-{{ checksum "package.json" }}
-      #    paths:
-      #      - node_modules
-      #      - ~/.yarn
-
-      # prepare the database
-      - run: touch storage/testing.sqlite
-      - run: php artisan migrate --env=testing --database=mysql --force
-
-      # run tests with phpunit or codecept
-      #- run: ./vendor/bin/phpunit
-      # this example uses codecept but you're not limited to it
-      - run: ./vendor/bin/codecept build
-      - run: ./vendor/bin/codecept run --xml result.xml
-      - store_test_results:
-          path: tests/_output
-      - store_artifacts:
-          path: tests/_output
-
-workflows:
-  version: 2
-  workflow:
-    jobs:
-      - test
+      - run:
+          name: "Generate App key"
+          command: php artisan key:generate
