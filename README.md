@@ -5,7 +5,7 @@
     <a href="https://circleci.com/gh/igorhaf/laravel-api-studio/tree/main"><img src="https://circleci.com/gh/igorhaf/laravel-api-studio/tree/main.svg?style=shield"></a>
 </div>
 
-#This project is in WIP, please don't consider using it for now, it's just a future project, follow us for updates on its evolution.
+# This project is in WIP, please don't consider using it for now, it's just a future project, follow us for updates on its evolution.
 
 Requirements
 ------------
