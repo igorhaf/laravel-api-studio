@@ -6,9 +6,12 @@
         <img src="https://circleci.com/gh/igorhaf/laravel-api-studio/tree/main.svg?style=shield">
     </a>
     <a href="https://github.com/igorhaf/laravel-api-studio/pulse" alt="Activity">
-        <img src="https://img.shields.io/github/commit-activity/m/badges/shields" />
+        <img src="https://img.shields.io/github/commit-activity/m/igorhaf/laravel-api-studio" />
     </a>
-</div>
+    <a href="https://github.com/igorhaf/laravel-api-studio/actions" alt="Activity">
+        <img src="https://github.com/igorhaf/laravel-api-studio/actions/workflows/laravel.yml/badge.svg" />
+    </a>
+</p>
 
 # This project is in WIP, please don't consider using it for now, it's just a future project, follow us for updates on its evolution.
 
