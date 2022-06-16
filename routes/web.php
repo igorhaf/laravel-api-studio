@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\MainController::class, 'index']);
-Route::any('/filetree', [\App\Http\Controllers\MainController::class, 'filetree'])->name('filetree');
+/*Route::get('/', [\App\Http\Controllers\MainController::class, 'index']);
+Route::any('/filetree', [\App\Http\Controllers\MainController::class, 'filetree'])->name('filetree');*/
+
+Route::get('/{any}', function () {
+    return view('layouts.vue');
+})->where('any', '.*');
+
 //Route::post('/file', [\App\Http\Controllers\MainController::class, 'getFile']);
