@@ -8,9 +8,6 @@
     <a href="https://github.com/igorhaf/laravel-api-studio/pulse" alt="Activity">
         <img src="https://img.shields.io/github/commit-activity/m/badges/shields" />
     </a>
-    <a href="https://coveralls.io/github/badges/shields">
-        <img src="https://img.shields.io/coveralls/github/badges/shields" alt="coverage">
-    </a>
 </div>
 
 # This project is in WIP, please don't consider using it for now, it's just a future project, follow us for updates on its evolution.
