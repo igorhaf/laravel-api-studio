@@ -1,24 +1,21 @@
 <template>
-    <div class="w-fixed  w-96  flex-shrink flex-grow-0 px-4">
-        <div id="sidebar-right"   class="sticky top-0 h-full w-full rounded-xl bg-gray-100 p-4">
-
-    <tree :nodes="nodes" :config="config" @nodeOpened="addServerNode">
-        <template #loading-slot>
-            <div class="progress">
-                <div class="indeterminate"></div>
-            </div>
-        </template>
-        <template #before-input="props">
-            <i class="folder-closed-icon" v-if="checkProp(props.node, 0)" />
-            <i class="php-icon" v-else-if="checkProp(props.node, 1)" />
-            <i class="css-icon" v-else-if="checkProp(props.node, 2)" />
-            <i class="javascript-icon" v-else-if="checkProp(props.node, 3)" />
-            <i class="blade-icon" v-else-if="checkProp(props.node, 4)" />
-            <i class="others-icon" v-else></i>
-        </template>
-    </tree>
+        <div id="sidebar-left" class="sticky top-0 h-full w-full rounded-xl bg-gray-100 p-4">
+            <tree :nodes="nodes" :config="config" @nodeOpened="addServerNode">
+                <template #loading-slot>
+                    <div class="progress">
+                        <div class="indeterminate"></div>
+                    </div>
+                </template>
+                <template #before-input="props">
+                    <i class="folder-closed-icon" v-if="checkProp(props.node, 0)" />
+                    <i class="php-icon" v-else-if="checkProp(props.node, 1)" />
+                    <i class="css-icon" v-else-if="checkProp(props.node, 2)" />
+                    <i class="javascript-icon" v-else-if="checkProp(props.node, 3)" />
+                    <i class="blade-icon" v-else-if="checkProp(props.node, 4)" />
+                    <i class="others-icon" v-else></i>
+                </template>
+            </tree>
         </div>
-    </div>
 </template>
 
 <script>

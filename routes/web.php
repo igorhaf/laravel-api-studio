@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::any('/filetree', [\App\Http\Controllers\MainController::class, 'filetree'])->name('filetree');*/
 
 Route::get('/{any}', function () {
-    return view('layouts.vue');
+    return view('layouts.app');
 })->where('any', '.*');
 
 //Route::post('/file', [\App\Http\Controllers\MainController::class, 'getFile']);

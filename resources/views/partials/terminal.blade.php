@@ -1,1 +1,0 @@
-<terminal-component></terminal-component>
