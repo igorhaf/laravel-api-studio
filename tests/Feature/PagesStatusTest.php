@@ -30,6 +30,4 @@ class PagesStatusTest extends TestCase
 
         $response->assertStatus(200);
     }
-
-
 }
