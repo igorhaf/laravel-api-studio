@@ -31,6 +31,7 @@
         "tree-helper": "^1.4.14",
         "vue": "^3.2.36",
         "vue-draggable-nested-tree": "^3.0.0-beta2",
+        "vue-router": "^4.0.16",
         "vue3-tree-vue": "^1.0.15",
         "vue3-treeview": "^0.3.8",
         "webpack": "^5.73.0",

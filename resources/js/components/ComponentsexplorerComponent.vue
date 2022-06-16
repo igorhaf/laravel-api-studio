@@ -1,5 +1,7 @@
 <template>
+    <div id="sidebar-left" class="sticky top-0 h-full w-full rounded-xl bg-gray-100 p-4">
     <tree :nodes="nodes" :config="config"></tree>
+    </div>
 </template>
 
 <script>
