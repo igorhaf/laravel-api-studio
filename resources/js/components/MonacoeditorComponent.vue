@@ -26,6 +26,6 @@ export default {
 </script>
 <style>
     #monaco-editor-container{
-        height: 500px;
+        height: 50%;
     }
 </style>
