@@ -90,6 +90,17 @@
     margin-top: 20px;
 }
 
+.database-icon{
+    width: 64px;
+    height: 59px;
+    top: -7px;
+    left: 7px;
+    position: relative;
+    background: url(../assets/icons/database.svg) no-repeat top left;
+    background-size: contain;
+    margin-top: 20px;
+}
+
 .closed-folder{
     width: 0;
     height: 0;
@@ -103,4 +114,26 @@
     border-style: solid;
     border-width: 11px 6.5px 0 6.5px;
     border-color: white transparent transparent transparent;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+.xterm .xterm-viewport{
+    scrollbar-width: auto;
+    scrollbar-color: #000000 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+.xterm-viewport::-webkit-scrollbar {
+    width: 15px;
+}
+
+.xterm-viewport::-webkit-scrollbar-track {
+    background: #2d3748;
+}
+
+.xterm-viewport::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    border-radius: 0px;
+    border: 1px solid #cfcfcf;
 }
