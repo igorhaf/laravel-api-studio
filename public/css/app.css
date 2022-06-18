@@ -7626,16 +7626,34 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: #1E1E1E;
 }
 
+#sidebar-left-container {
+  padding-left: 1px;
+  padding-right: 1px;
+  padding-bottom: 49px;
+}
+
 #sidebar-right {
   background-color: #1E1E1E;
 }
 
+#sidebar-right-container {
+  padding-left: 1px;
+  padding-right: 1px;
+  padding-bottom: 49px;
+}
+
 #nav-bar {
-  background-color: #464646;
+  background-color: #1E1E1E;
 }
 
 #body-color {
   background-color: #464646;
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 79px;
+  bottom: 0px;
+  padding-top: 1px;
 }
 
 #footer-color {
@@ -7731,6 +7749,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-style: solid;
   border-width: 11px 6.5px 0 6.5px;
   border-color: white transparent transparent transparent;
+}
+
+.terminal {
+  height: 40%;
+}
+
+footer {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+#main-container {
+  padding-left: 1px;
+  padding-right: 1px;
 }
 
 .hover\:cursor-pointer:hover {
