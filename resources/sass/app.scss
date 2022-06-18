@@ -142,7 +142,28 @@ footer{
     left: 0px;
     right: 0px;
 }
-#main-container{
+#main-container {
     padding-left: 1px;
     padding-right: 1px;
+}
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+.xterm .xterm-viewport{
+    scrollbar-width: auto;
+    scrollbar-color: #000000 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+.xterm-viewport::-webkit-scrollbar {
+    width: 15px;
+}
+
+.xterm-viewport::-webkit-scrollbar-track {
+    background: #2d3748;
+}
+
+.xterm-viewport::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    border-radius: 0px;
+    border: 1px solid #cfcfcf;
 }
