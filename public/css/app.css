@@ -7717,6 +7717,17 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 20px;
 }
 
+.database-icon {
+  width: 64px;
+  height: 59px;
+  top: -7px;
+  left: 7px;
+  position: relative;
+  background: url(../assets/icons/database.svg) no-repeat top left;
+  background-size: contain;
+  margin-top: 20px;
+}
+
 .closed-folder {
   width: 0;
   height: 0;
