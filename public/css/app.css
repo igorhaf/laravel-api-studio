@@ -7735,6 +7735,24 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 20px;
 }
 
+.env-icon {
+  width: 56px;
+  height: 64px;
+  background: url(../assets/icons/env.svg) no-repeat top left;
+  background-size: contain;
+  margin-top: 20px;
+  margin-left: 13px;
+}
+
+.config-icon {
+  width: 56px;
+  height: 64px;
+  background: url(../assets/icons/config-icon.svg) no-repeat top left;
+  background-size: contain;
+  margin-top: 20px;
+  margin-left: 5px;
+}
+
 .database-icon {
   width: 64px;
   height: 59px;
